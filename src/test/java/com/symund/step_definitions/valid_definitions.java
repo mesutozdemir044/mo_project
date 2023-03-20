@@ -18,7 +18,7 @@ public class valid_definitions {
 
     @Given("user is on the symund login page")
     public void user_is_on_the_symund_login_page() {
-        Driver.getDriver().get("https://qa.symund.com/index.php/login?clear=1");
+        Driver.getDriver().get("https://qa.symund.com");
     }
 
     @When("user enters symund username")
@@ -37,11 +37,16 @@ public class valid_definitions {
     }
 
     @Then("user should see the dashboard")
-    public void user_should_see_the_dashboard() {
+    public void user_should_see_the_dashboard() throws InterruptedException {
         wait.until(ExpectedConditions.titleIs(Driver.getDriver().getTitle()));
         String actual=Driver.getDriver().getTitle();
         String expected="Pano - Symund - QA";
         Assert.assertTrue(actual.contains(expected));
+        loginPage.profilIcon.click();
+        loginPage.logout.click();
+        wait.until(ExpectedConditions.titleIs("Symund - QA"));
+        Thread.sleep(3000);
+
     }
 
     @Then("user verify to url {string}")
@@ -59,10 +64,13 @@ public class valid_definitions {
     }
 
     @Then("username verify under profile icon as username")
-    public void usernameVerifyUnderProfileIconAsUsername() {
+    public void usernameVerifyUnderProfileIconAsUsername() throws InterruptedException {
         String expectedProfilName = "Employee170";
         String actualProfilName = loginPage.profilIconVerify.getText();
         Assert.assertEquals(expectedProfilName, actualProfilName);
+        loginPage.logout.click();
+
+
     }
 
     @When("user enters symund password and enter")
@@ -173,5 +181,39 @@ public class valid_definitions {
         String expectedPasswordPlaceholder="Password";
         Assert.assertEquals(expectedPasswordPlaceholder,actualPasswordplaceholder);
 
+    }
+    @Given("login page Symund profil section")
+    public void login_page_symund_profil_section() {
+        loginPage.username.sendKeys("Employee170");
+        loginPage.password.sendKeys("Employee123");
+        loginPage.click.click();
+    }
+
+
+    @Then("user click to log out")
+    public void user_click_to_log_out() {
+        loginPage.logout.click();
+        wait.until(ExpectedConditions.titleIs("Symund - QA"));
+    }
+
+
+    @Then("verify log out page")
+    public void verifyLogOutPage() {
+        String expected="Symund - QA";
+        String actual=Driver.getDriver().getTitle();
+        Assert.assertTrue(actual.contains(expected));
+
+    }
+
+    @When("user click to back icon")
+    public void userClickToBackIcon() {
+       loginPage.backspace.sendKeys(Keys.ENTER);
+    }
+
+    @Then("verify go to login page")
+    public void verifyGoToLoginPage() {
+        String expected="Symund - QA";
+        String actual=Driver.getDriver().getTitle();
+        Assert.assertTrue(actual.contains(expected));
     }
 }

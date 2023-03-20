@@ -15,11 +15,7 @@ Feature: Symund login feature
     And user click to login button
     Then user should see the dashboard
 
-  @SYMU10-364
-  Scenario: Login as Symund valid credentials with enter keyboard
-    When user enters symund username
-    When user enters symund password and enter
-    Then user should see the dashboard
+
 
   @SYMU10-365
   Scenario: Login as Symund verify dashboard profile icon and url
@@ -36,7 +32,6 @@ Feature: Symund login feature
     When user enters symund unvalid password
     And user click to login button
     Then user should see Wrong username or password
-
   @SYMU10-369
   Scenario: Login as Symund empty username and password
     When user not enter any username to box
@@ -97,6 +92,12 @@ Feature: Symund login feature
   Scenario: Login as Symund and verify placeholders
     When user take username placeholder
     Then user take password placeholder
+
+  @SYMU10-364
+  Scenario: Login as Symund enter keywoard
+    When user enters symund username
+    When user enters symund password and enter
+    When user should see the dashboard
 
 
 

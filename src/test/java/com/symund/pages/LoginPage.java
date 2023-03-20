@@ -29,5 +29,9 @@ public class LoginPage {
     public WebElement forgotPassword;
     @FindBy(xpath ="//input[@id='reset-password-submit']" )
     public WebElement resetPassword;
+    @FindBy(xpath = "//nav[@id='expanddiv']/ul/li[4]/a")
+    public WebElement logout;
+    @FindBy(xpath ="//body" )
+    public WebElement backspace;
 
 }
